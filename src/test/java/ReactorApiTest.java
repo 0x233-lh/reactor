@@ -1,5 +1,6 @@
 import com.sun.xml.internal.bind.v2.TODO;
 import org.junit.jupiter.api.*;
+import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -178,6 +179,18 @@ public class ReactorApiTest {
         public void createFluxFromMultipleMono() {
             Mono<String> mono1 = Mono.just("foo");
             Mono<String> mono2 = Mono.just("bar");
+        }
+    }
+
+    @Nested
+    class CommonTest {
+
+
+        public void subscribeTest() {
+
+            Disposable subscribe = Flux.range(1, 10).subscribe(System.out::println);
+
+            subscribe.dispose();
         }
     }
 
